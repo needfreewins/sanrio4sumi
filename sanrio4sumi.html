@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sanrio Wonderland</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to bottom, #ffe6f0, #ffa0d0);
+      color: #ff69b4;
+      overflow-x: hidden;
+      background-image: url('https://i.pinimg.com/originals/0e/e6/b5/0ee6b51d46dc252ef0ec53e0a409e7ea.png');
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px;
+      background-color: rgba(255, 182, 193, 0.7);
+      box-shadow: 0 0 10px pink;
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin: 0;
+      text-shadow: 2px 2px white;
+    }
+
+    .music-controls {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .music-controls input[type="range"] {
+      width: 200px;
+    }
+
+    .characters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 30px;
+    }
+
+    .character {
+      text-align: center;
+      background-color: rgb(101, 101, 101);
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 0 10px pink;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .character:hover {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    .character img {
+      width: 150px;
+      height: auto;
+      animation: floaty 3s ease-in-out infinite;
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(255, 182, 193, 0.7);
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎀 Sanrio Wonderland 🎀</h1>
+    <p>Welcome to your pink paradise of cuteness!</p>
+  </header>
+
+  <!-- YouTube Background Music -->
+  <div class="music-controls">
+    <div id="player"></div>
+    <label for="volume">Volume: </label>
+    <input type="range" id="volume" min="0" max="100" step="1" value="10">
+  </div>
+
+  <section class="characters">
+    <div class="character">
+      <img src="https://gifdb.com/images/high/hello-kitty-smiling-coloring-lz6k44ng15gf65ey.webp" alt="Hello Kitty">
+      <p>Hello Kitty</p>
+    </div>
+    <div class="character">
+      <img src="https://gifdb.com/images/high/my-melody-in-bed-v4nn4w3dgcoh5qe7.webp" alt="My Melody">
+      <p>My Melody</p>
+    </div>
+    <div class="character">
+      <img src="https://gifdb.com/images/high/cinnamoroll-498-x-498-gif-oyi7dqx5azqmr2bb.webp" alt="Cinnamoroll">
+      <p>Cinnamoroll</p>
+    </div>
+    <div class="character">
+      <img src="https://gifdb.com/images/high/kuromi-cute-giggle-i4kvk9eu4ohxkmhx.webp" alt="Kuromi">
+      <p>Kuromi</p>
+    </div>
+  </section>
+
+  <footer>
+    💖 Made with love and sparkles by @educate 💖
+  </footer>
+
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    let player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '0',
+        width: '0',
+        videoId: 'fzE_kHkem8A', // Replace with your own video ID if needed
+        playerVars: {
+          autoplay: 1,
+          loop: 1,
+          playlist: 'fzE_kHkem8A', // Required for loop to work
+          controls: 0,
+          modestbranding: 1,
+          showinfo: 1,
+          rel: 0
+        },
+        events: {
+          onReady: (event) => {
+            event.target.setVolume(60); // Default volume
+            event.target.playVideo();
+          }
+        }
+      });
+    }
+
+    document.getElementById('volume').addEventListener('input', function () {
+      if (player && player.setVolume) {
+        player.setVolume(this.value);
+      }
+    });
+  </script>
+
+</body>
+</html>
